@@ -1,0 +1,164 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://addons/todot/Project.gd" type="Script" id=1]
+[ext_resource path="res://addons/todot/TaskList.gd" type="Script" id=2]
+[ext_resource path="res://addons/todot/Dialog.gd" type="Script" id=3]
+[ext_resource path="res://addons/todot/assets/Clear.svg" type="Texture" id=4]
+[ext_resource path="res://addons/todot/assets/GuiTabMenuHl.svg" type="Texture" id=5]
+[ext_resource path="res://addons/todot/assets/Add.svg" type="Texture" id=6]
+[ext_resource path="res://addons/todot/assets/Close.svg" type="Texture" id=7]
+[ext_resource path="res://addons/todot/assets/GuiVisibilityHidden.svg" type="Texture" id=8]
+[ext_resource path="res://addons/todot/assets/Tools.svg" type="Texture" id=9]
+[ext_resource path="res://addons/todot/assets/Load.svg" type="Texture" id=10]
+[ext_resource path="res://addons/todot/assets/Reload.svg" type="Texture" id=11]
+[ext_resource path="res://addons/todot/assets/Save.svg" type="Texture" id=12]
+[ext_resource path="res://addons/todot/assets/ArrowRight.svg" type="Texture" id=13]
+[ext_resource path="res://addons/todot/Settings.gd" type="Script" id=14]
+
+[node name="Todot" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Project" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="HBoxContainer" parent="Project"]
+margin_right = 275.0
+margin_bottom = 24.0
+
+[node name="List" type="OptionButton" parent="Project/Controls"]
+margin_right = 179.0
+margin_bottom = 24.0
+hint_tooltip = "Lists"
+size_flags_horizontal = 3
+
+[node name="Add" type="ToolButton" parent="Project/Controls"]
+margin_left = 183.0
+margin_right = 211.0
+margin_bottom = 24.0
+hint_tooltip = "New Task
+If no list exists, opens New List Panel instead."
+icon = ExtResource( 6 )
+
+[node name="Clear" type="ToolButton" parent="Project/Controls"]
+margin_left = 215.0
+margin_right = 243.0
+margin_bottom = 24.0
+hint_tooltip = "Hide Completed Tasks
+To view hidden tasks, go to More > Show Hidden"
+icon = ExtResource( 4 )
+
+[node name="More" type="MenuButton" parent="Project/Controls"]
+margin_left = 247.0
+margin_right = 275.0
+margin_bottom = 24.0
+hint_tooltip = "More"
+icon = ExtResource( 5 )
+items = [ "New List", ExtResource( 6 ), 0, false, false, 0, 0, null, "", false, "Show Hidden", ExtResource( 8 ), 0, false, false, 1, 0, null, "", false, "Save", ExtResource( 12 ), 0, false, false, 2, 0, null, "", false, "Load", ExtResource( 10 ), 0, false, false, 3, 0, null, "", false, "Settings", ExtResource( 9 ), 0, false, false, 4, 0, null, "", false ]
+
+[node name="NewList" type="HBoxContainer" parent="Project"]
+visible = false
+margin_top = 26.0
+margin_right = 275.0
+margin_bottom = 50.0
+
+[node name="ListName" type="LineEdit" parent="Project/NewList"]
+margin_right = 243.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "New List Name..."
+
+[node name="Done" type="Button" parent="Project/NewList"]
+margin_left = 247.0
+margin_right = 275.0
+margin_bottom = 24.0
+hint_tooltip = "Add New List
+Shortcut: Enter"
+icon = ExtResource( 13 )
+
+[node name="Cancel" type="ToolButton" parent="Project/NewList"]
+margin_left = 247.0
+margin_right = 275.0
+margin_bottom = 24.0
+hint_tooltip = "Close New List Panel"
+icon = ExtResource( 7 )
+
+[node name="TaskList" type="VBoxContainer" parent="Project"]
+margin_top = 28.0
+margin_right = 275.0
+margin_bottom = 28.0
+script = ExtResource( 2 )
+
+[node name="Dialog" type="ConfirmationDialog" parent="."]
+margin_left = 428.0
+margin_top = 29.0
+margin_right = 650.0
+margin_bottom = 99.0
+window_title = "New List"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inputs" type="VBoxContainer" parent="Dialog"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 34.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="Dialog/Inputs"]
+margin_right = 206.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+placeholder_text = "List Name..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="WindowDialog" parent="."]
+margin_left = 391.0
+margin_top = 29.0
+margin_right = 632.0
+margin_bottom = 182.0
+window_title = "Settings"
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="VBoxContainer" parent="Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Reset" type="Button" parent="Settings/Container"]
+margin_right = 241.0
+margin_bottom = 22.0
+text = "Reset All Data"
+icon = ExtResource( 11 )
+
+[node name="PrintModel" type="Button" parent="Settings/Container"]
+margin_top = 26.0
+margin_right = 241.0
+margin_bottom = 48.0
+text = "Print Model to Console"
+icon = ExtResource( 12 )
+
+[connection signal="item_selected" from="Project/Controls/List" to="Project" method="show_list"]
+[connection signal="text_entered" from="Project/NewList/ListName" to="Project" method="add_new_list"]
+[connection signal="pressed" from="Project/NewList/Done" to="Project" method="new_list_done_pressed"]
+[connection signal="pressed" from="Project/NewList/Cancel" to="Project" method="close_new_list_panel"]
+[connection signal="confirmed" from="Dialog" to="Dialog" method="confirmed"]
+[connection signal="button_up" from="Settings/Container/Reset" to="Settings" method="reset"]
+[connection signal="pressed" from="Settings/Container/PrintModel" to="Settings" method="print_model"]
