@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Todot"
-config/icon="res://icon.png"
+config/icon="res://addons/todot/assets/icon.png"
 
 [display]
 
