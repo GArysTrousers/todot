@@ -33,6 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Todot"
+config/description="A Godot Editor Plugin that adds a todo list side dock."
 config/icon="res://addons/todot/assets/icon.png"
 
 [display]

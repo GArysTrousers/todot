@@ -3,3 +3,4 @@ export.cfg
 export_presets.cfg
 *.import
 addons/todot/data/*
+Save.tscn
