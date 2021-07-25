@@ -16,5 +16,5 @@ A Godot Editor Plugin that adds a todo list side dock.
 
 ## Notes
 - You can view cleared tasks later by going to More -> Show Hidden Items
-- save data is kept in addons/todot/data/project.data
+- Save data is kept in addons/todot/data/project.data
 - Yes, I'm very proud of the name
