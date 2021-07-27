@@ -34,11 +34,12 @@ _global_script_class_icons={
 
 config/name="Todot"
 config/description="A Godot Editor Plugin that adds a todo list side dock."
+run/main_scene="res://addons/todot/Dock.tscn"
 config/icon="res://addons/todot/assets/icon.png"
 
 [display]
 
-window/size/width=275
+window/size/width=350
 window/size/height=431
 
 [physics]

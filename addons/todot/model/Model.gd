@@ -10,6 +10,20 @@ func clear_completed_tasks_in_list(list_index):
 		if task.completed:
 			task.hidden = true
 
+func move_list(list, distance):
+	var index = lists.find(list)
+	lists.remove(index)
+	lists.insert(
+		clamp(index + distance, 0, lists.size()), list)
+
+func rename_list(list, new_name):
+	var index = lists.find(list)
+	lists[index].list_name = new_name
+		
+func delete_list(list):
+	var index = lists.find(list)
+	lists.remove(index)
+
 func serialize():
 	var data = {
 		"cur_list": cur_list,

@@ -2,5 +2,5 @@
 export.cfg
 export_presets.cfg
 *.import
-addons/todot/data/*
+addons/todot/data/project.data
 Save.tscn

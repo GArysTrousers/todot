@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://addons/todot/Project.gd" type="Script" id=1]
 [ext_resource path="res://addons/todot/TaskList.gd" type="Script" id=2]
@@ -14,8 +14,10 @@
 [ext_resource path="res://addons/todot/assets/Save.svg" type="Texture" id=12]
 [ext_resource path="res://addons/todot/assets/ArrowRight.svg" type="Texture" id=13]
 [ext_resource path="res://addons/todot/Settings.gd" type="Script" id=14]
+[ext_resource path="res://addons/todot/ListManager.gd" type="Script" id=15]
+[ext_resource path="res://addons/todot/assets/AnimationTrackList.svg" type="Texture" id=16]
 
-[node name="Todot" type="Control"]
+[node name="Todo" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -31,38 +33,39 @@ __meta__ = {
 }
 
 [node name="Controls" type="HBoxContainer" parent="Project"]
-margin_right = 275.0
+margin_right = 350.0
 margin_bottom = 24.0
 
 [node name="List" type="OptionButton" parent="Project/Controls"]
-margin_right = 179.0
+margin_right = 254.0
 margin_bottom = 24.0
 hint_tooltip = "Lists"
 size_flags_horizontal = 3
+selected = 1
 
 [node name="Add" type="ToolButton" parent="Project/Controls"]
-margin_left = 183.0
-margin_right = 211.0
+margin_left = 258.0
+margin_right = 286.0
 margin_bottom = 24.0
 hint_tooltip = "New Task
 If no list exists, opens New List Panel instead."
 icon = ExtResource( 6 )
 
 [node name="Clear" type="ToolButton" parent="Project/Controls"]
-margin_left = 215.0
-margin_right = 243.0
+margin_left = 290.0
+margin_right = 318.0
 margin_bottom = 24.0
 hint_tooltip = "Hide Completed Tasks
 To view hidden tasks, go to More > Show Hidden"
 icon = ExtResource( 4 )
 
 [node name="More" type="MenuButton" parent="Project/Controls"]
-margin_left = 247.0
-margin_right = 275.0
+margin_left = 322.0
+margin_right = 350.0
 margin_bottom = 24.0
 hint_tooltip = "More"
 icon = ExtResource( 5 )
-items = [ "New List", ExtResource( 6 ), 0, false, false, 0, 0, null, "", false, "Show Hidden", ExtResource( 8 ), 0, false, false, 1, 0, null, "", false, "Save", ExtResource( 12 ), 0, false, false, 2, 0, null, "", false, "Load", ExtResource( 10 ), 0, false, false, 3, 0, null, "", false, "Settings", ExtResource( 9 ), 0, false, false, 4, 0, null, "", false ]
+items = [ "New List", ExtResource( 6 ), 0, false, false, 0, 0, null, "", false, "Manage Lists", ExtResource( 16 ), 0, false, false, 1, 0, null, "", false, "Show Hidden", ExtResource( 8 ), 0, false, false, 2, 0, null, "", false, "Save", ExtResource( 12 ), 0, false, false, 3, 0, null, "", false, "Load", ExtResource( 10 ), 0, false, false, 4, 0, null, "", false, "Settings", ExtResource( 9 ), 0, false, false, 5, 0, null, "", false ]
 
 [node name="NewList" type="HBoxContainer" parent="Project"]
 visible = false
@@ -93,8 +96,8 @@ icon = ExtResource( 7 )
 
 [node name="TaskList" type="VBoxContainer" parent="Project"]
 margin_top = 28.0
-margin_right = 275.0
-margin_bottom = 28.0
+margin_right = 350.0
+margin_bottom = 80.0
 script = ExtResource( 2 )
 
 [node name="Dialog" type="ConfirmationDialog" parent="."]
@@ -155,6 +158,42 @@ margin_bottom = 48.0
 text = "Print Model to Console"
 icon = ExtResource( 12 )
 
+[node name="ListManager" type="WindowDialog" parent="."]
+visible = true
+margin_left = 391.0
+margin_top = 29.0
+margin_right = 665.0
+margin_bottom = 377.0
+window_title = "List Manager"
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ListManager"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ListManager/VBoxContainer"]
+margin_right = 274.0
+margin_bottom = 348.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lists" type="VBoxContainer" parent="ListManager/VBoxContainer/ScrollContainer"]
+margin_right = 274.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="item_selected" from="Project/Controls/List" to="Project" method="show_list"]
 [connection signal="text_entered" from="Project/NewList/ListName" to="Project" method="add_new_list"]
 [connection signal="pressed" from="Project/NewList/Done" to="Project" method="new_list_done_pressed"]
@@ -162,3 +201,5 @@ icon = ExtResource( 12 )
 [connection signal="confirmed" from="Dialog" to="Dialog" method="confirmed"]
 [connection signal="button_up" from="Settings/Container/Reset" to="Settings" method="reset"]
 [connection signal="pressed" from="Settings/Container/PrintModel" to="Settings" method="print_model"]
+[connection signal="about_to_show" from="ListManager" to="ListManager" method="on_open"]
+[connection signal="popup_hide" from="ListManager" to="ListManager" method="on_close"]
