@@ -25,7 +25,7 @@ items = [ "Move Up", ExtResource( 3 ), 0, false, false, 0, 0, null, "", false, "
 
 [node name="TaskText" type="LineEdit" parent="."]
 margin_left = 28.0
-margin_right = 247.0
+margin_right = 322.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 __meta__ = {
@@ -33,8 +33,8 @@ __meta__ = {
 }
 
 [node name="Completed" type="CheckBox" parent="."]
-margin_left = 251.0
-margin_right = 275.0
+margin_left = 326.0
+margin_right = 350.0
 margin_bottom = 24.0
 __meta__ = {
 "_edit_use_anchors_": false

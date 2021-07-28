@@ -9,6 +9,8 @@ func reset():
 		get_parent().get_node("Project")
 	)
 
-
 func print_model():
 	print(get_parent().get_node("Project").model.serialize())
+
+func open_github():
+	OS.shell_open("https://github.com/GArysTrousers/todot")

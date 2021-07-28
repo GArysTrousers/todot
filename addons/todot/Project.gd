@@ -26,9 +26,9 @@ func _enter_tree():
 	$Controls/More.get_popup().add_icon_item(icons["add"], "New List")
 	$Controls/More.get_popup().add_icon_item(icons["list"], "Manage Lists")
 	$Controls/More.get_popup().add_icon_item(show_hidden_icon(), "Show Hidden")
-	$Controls/More.get_popup().add_icon_item(icons["save"], "Save")
-	$Controls/More.get_popup().add_icon_item(icons["load"], "Load")
 	$Controls/More.get_popup().add_icon_item(icons["tools"], "Settings")
+#	$Controls/More.get_popup().add_icon_item(icons["save"], "Save")
+#	$Controls/More.get_popup().add_icon_item(icons["load"], "Load")
 	$Controls/More.get_popup().connect("id_pressed", self, "more_option_pressed")
 
 func more_option_pressed(id):
@@ -42,11 +42,11 @@ func more_option_pressed(id):
 			$Controls/More.get_popup().set_item_icon(3, show_hidden_icon())
 			update_current_list()
 		3:
-			save_project()
-		4:
-			load_project()
-		5:
 			get_parent().get_node("Settings").popup_centered()
+		4:
+			save_project()
+		5:
+			load_project()
 
 func show_hidden_icon():
 	if model.show_hidden:

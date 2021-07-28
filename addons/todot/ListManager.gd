@@ -29,7 +29,10 @@ func delete_list(list):
 
 func on_open():
 	var model = get_parent().get_node("Project").model
-	last_open_list = model.lists[model.cur_list]
+	if model.cur_list > -1:
+		last_open_list = model.lists[model.cur_list]
+	else:
+		last_open_list = null
 	show_lists()
 
 func on_close():

@@ -42,6 +42,10 @@ config/icon="res://addons/todot/assets/icon.png"
 window/size/width=350
 window/size/height=431
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/todot/plugin.cfg" )
+
 [physics]
 
 common/enable_pause_aware_picking=true
